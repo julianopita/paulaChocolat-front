@@ -9,8 +9,7 @@ export default defineNuxtConfig({
       }
     ],
       script: [
-        { src: '/javascript/script.js', defer: true },
-        { src: '/javascript/mudar_tema.js', defer: true },
+        { src: '/javascript/script.js', defer: true }       
       ],
     },
   },  

@@ -2,13 +2,7 @@ $(document).ready(function() {
     $('#mobile_btn').on('click', function() {
         $('#mobile_menu').toggleClass('active');
         $('#mobile_btn').find('i').toggleClass('fa-x');
-    }); 
-    
-    function toggleContent() {
-      const content = document.getElementById('hide');
-      content.style.display = content.style.display === 'none' ? 'block' : 'none';
-    } 
-   
+    });
 
     const sections = $('section');
     const navItems = $('.nav-item');
