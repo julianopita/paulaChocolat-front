@@ -1,54 +1,97 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+
+/* // Código para testar com dados mockados
+const produtosMock = [
+  {
+    id: 1,
+    titulo: "Produto de Teste 1",
+    descricao: "Descrição do produto 1",
+    preco: 99.99,
+    imagem: "https://via.placeholder.com/300"
+  },
+  {
+    id: 2,
+    titulo: "Produto de Teste 2",
+    descricao: "Descrição do produto 2",
+    preco: 149.99,
+    imagem: "https://via.placeholder.com/300"
+  },
+  {
+    id: 3,
+    titulo: "Produto de Teste 3",
+    descricao: "Descrição do produto 3",
+    preco: 199.99,
+    imagem: "https://via.placeholder.com/300"
+  }
+];
+
+const produtos = ref([]);
+const loading = ref(true);
+const error = ref(null);
+
+// Substituindo a lógica de fetch pelos dados mockados
+const fetchProdutos = async () => {
+  try {
+    // Simula um delay para o teste
+    await new Promise(resolve => setTimeout(resolve, 500));
+    produtos.value = produtosMock; // Atribui os dados mockados
+  } catch (err) {
+    error.value = err.message;
+    console.error(err);
+  } finally {
+    loading.value = false;
+  }
+}; */
+
 
 // Defina as props corretamente
-defineProps({
+const props = defineProps({
   apiEndpoint: {
     type: String,
     required: true,
   },
 });
 
-
 const produtos = ref([]);
+const loading = ref(true);
+const error = ref(null);
 
 const fetchProdutos = async () => {
   try {
-    const response = await fetch(apiEndpoint);
+    // Agora estamos usando props.apiEndpoint para garantir que estamos acessando corretamente a prop
+    const response = await fetch(props.apiEndpoint);
+    if (!response.ok) throw new Error('Erro ao buscar produtos');
     produtos.value = await response.json();
-  } catch (error) {
-    console.error("Erro ao buscar produtos:", error);
+  } catch (err) {
+    error.value = err.message;
+    console.error('Erro no fetch:', err);
+  } finally {
+    loading.value = false;
   }
 };
 
-//const fetchProdutos = async () => {
- // try {
-    //const { data } = await useFetch('/produtos.json'); //mock
-    //const { data } = await useFetch('http://localhost:3000/produtos'); // useFetch usa a prop apiEndpoint
-    //produtos.value = data.value || [];
- // } catch (error) {
-  //  console.error("Erro ao buscar produtos:", error);
- // }
-//};
-
-fetchProdutos();
-
+onMounted(fetchProdutos);
 </script>
-
 
 <template>
   <div id="dishes">
-    <div v-for="produto in produtos" :key="produto.id" class="dish">
-      <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" />
-      <h3 class="dish-title">{{ produto.titulo }}</h3>
-      <span class="dish-description">{{ produto.descricao }}</span>
-      <div class="dish-price">
-        <h4>R$ {{ produto.preco.toFixed(2).replace('.', ',') }}</h4>
+    <p v-if="loading">Carregando produtos...</p>
+    <p v-if="error">{{ error }}</p>
+    <div v-if="produtos.length > 0">
+      <div v-for="produto in produtos" :key="produto.id" class="dish">
+        <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" />
+        <h3 class="dish-title">{{ produto.titulo }}</h3>
+        <span class="dish-description">{{ produto.descricao }}</span>
+        <div class="dish-price">
+          <h4>R$ {{ produto.preco.toFixed(2).replace('.', ',') }}</h4>
+        </div>
       </div>
     </div>
+    <p v-else-if="!loading">Nenhum produto encontrado.</p>
   </div>
 </template>
 
-<style scoped>
-/* Estilos específicos para o componente */
-</style>
+<style src="../assets/css/style.css"></style>
+

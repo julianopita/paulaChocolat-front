@@ -1,10 +1,10 @@
+<script setup>
+import Products from '~/components/Products.vue'; // Importação correta
+</script>
+
 <template>
     Produtos dinâmicos
- <!--Produtos dinâmicos-->
+ <Products apiEndpoint="http://localhost:3000/produtos" />
 </template>
-
-<script setup>
-// Nenhuma lógica específica necessária para esta página
-</script>
 
 <style src="../assets/css/style.css"></style>
