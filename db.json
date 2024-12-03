@@ -14,5 +14,19 @@
       "preco": 199.5,
       "imagem": "/images/chocolates.jpg"
     }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "email": "usuario@example.com",
+      "senha": "1234",
+      "papel": "Cliente"
+    },
+    {
+      "id": 2,
+      "email": "gerente@example.com",
+      "senha": "1234",
+      "papel": "Gerente"
+    }    
   ]
 }
