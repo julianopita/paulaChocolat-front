@@ -1,10 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { worker } from './mocks/browser';
-worker.start();
-
-
 
 const props = defineProps({
   apiEndpoint: {
@@ -17,37 +12,33 @@ const email = ref('');
 const senha = ref('');
 const errorMessage = ref('');  // Corrigido para ser um ref reativo
 
-// Variáveis de navegação
-const router = useRouter();
-
 const handleLogin = async () => {
   try {
-    // Criando o corpo da requisição
-    const body = JSON.stringify({ email: email.value, senha: senha.value });
-
-    // Enviando a requisição POST para a API
-    const response = await fetch(`${apiEndpoint}/login/usuario`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
-    });
-
-    // Verificando se a resposta foi bem-sucedida
+    // Construindo a URL para a consulta do GET com a API Endpoint via props
+    const response = await fetch(`${props.apiEndpoint}/usuarios?email=${email.value}&senha=${senha.value}`);
+    console.log(response);
+    // Verificando se o usuário foi encontrado
     if (!response.ok) {
       throw new Error('Usuário não encontrado ou senha incorreta');
     }
 
     // Convertendo a resposta para JSON
-    const usuario = await response.json();
+    const usuarios = await response.json();
+    console.log(usuarios);
 
-    // Armazenando o papel do usuário na sessão
+    // Se não encontrar nenhum usuário
+    if (usuarios.length === 0) {
+      throw new Error('Usuário não encontrado ou senha incorreta');
+    }
+
+    // Usuário encontrado, armazenando o papel na sessão
+    const usuario = usuarios[0]; // Considerando que o email seja único
     sessionStorage.setItem('papel', usuario.papel);
-    sessionStorage.setItem('userId', usuario.id);
-    sessionStorage.setItem('userEmail', usuario.email);
+    sessionStorage.setItem('primeiroNome', usuario.primeiroNome);
+    console.log(usuario.papel);
+    console.log(sessionStorage);
 
-    // Redirecionando para a página principal ou outra página
+    // Redirecionar para a página principal ou outra página
     router.push('/');
   } catch (error) {
     // Exibindo mensagem de erro se houver

@@ -19,10 +19,34 @@
         <li class="nav_item" :class="{ active: currentRoute === '/orcamento' }">
           <NuxtLink to="/orcamento" class="nav-link">Orçamentos</NuxtLink>
         </li>
+        <li class="nav_item" :class="{ active: currentRoute === '/login' }">
+          <NuxtLink to="/login" class="nav-link">Login</NuxtLink>
+        </li>
+        
+    <div v-if="papel === 'Gerente'">
+      <!-- Opções do Gerente -->
+      <li class="nav_item" :class="{ active: currentRoute === '/gerenciar' }">
+          <NuxtLink to="/gerenciar" class="nav-link">Gerenciar</NuxtLink>
+        </li>
+    </div>
+    <div v-if="papel === 'Cliente'">
+      <!-- Opções do Cliente -->
+      <li class="nav_item" :class="{ active: currentRoute === '/meusOrcamentos' }">
+          <NuxtLink to="/meusOrcamentos" class="nav-link">Meus Orçamentos</NuxtLink>
+        </li>
+    </div>
+    <li class="nav_link">Bem vindo, {{ nome }}</li>
+    
+
+
+
         <button class="mudar-tema" @click="mudarTema">
           <span class="material-symbols-outlined">contrast</span>
         </button>
       </ul>
+      <div>
+    
+  </div>
 
       <!-- Menu de hambúrguer para mobile -->
       <button id="mobile_btn" @click="toggleMobileMenu">
@@ -145,6 +169,27 @@ export default {
     }
   }
 };
+</script>
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const papel = ref('');
+const nome = ref('');
+
+// Recupera o papel armazenado na sessão
+onMounted(() => {
+  const storedPapel = sessionStorage.getItem('papel');
+  if (storedPapel) {
+    papel.value = storedPapel;
+  }
+  });
+
+  onMounted(() => {
+  const storedNome = sessionStorage.getItem('primeiroNome');
+  if (storedNome) {
+    nome.value = storedNome;
+  }
+});
 </script>
 
 <style src="~/assets/css/style.css"></style>
