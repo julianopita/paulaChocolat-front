@@ -1,6 +1,6 @@
 <template>
   <section id="testimonials" class="testimonials-section">
-    <img src="~/assets/images/paulachef2.png" id="testimonial_chef" alt="Chef Paula" />
+    <img src="/images/paulachef2.png" id="testimonial_chef" alt="Chef Paula" />
 
     <div id="testimonials_content">
       <h2 class="section-title">Depoimentos</h2>
@@ -8,7 +8,7 @@
 
       <div id="feedbacks">
         <div class="feedback">
-          <img src="~/assets/images/woman2.jpg" class="feedback-avatar" alt="Louise Bertha" />
+          <img src="/images/woman2.jpg" class="feedback-avatar" alt="Louise Bertha" />
 
           <div class="feedback-content">
             <p>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="feedback">
-          <img src="~/assets/images/woman.jpg" class="feedback-avatar" alt="Raquel Ferreira" />
+          <img src="/images/woman.jpg" class="feedback-avatar" alt="Raquel Ferreira" />
 
           <div class="feedback-content">
             <p>

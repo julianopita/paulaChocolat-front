@@ -1,12 +1,12 @@
 <template>
   <main id="content">
     <div id="section1">
-      <img src="~/assets/images/paulachef3.jpg" id="chefe-paula" alt />
+      <img src="/images/paulachef3.jpg" id="chefe-paula" alt />
       <div id="comentarios-container">
         <h2 id="titulo">Sobre Nós</h2>
         <h3 id="sub-titulo">A nossa história com a Paula Au Chocolat</h3>
         <div class="comentarios">
-          <img id="img-vo" src="~/assets/images/vo_paula.jpg" alt="" />
+          <img id="img-vo" src="/images/vo_paula.jpg" alt="" />
           <div class="comentarios-texto">
             <p class="nome">Maria, Vó de Paula</p>
             <p>
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="comentarios">
-          <img id="img-mae" src="~/assets/images/mae_paula.jpg" alt="" />
+          <img id="img-mae" src="/images/mae_paula.jpg" alt="" />
           <div class="comentarios-texto">
             <p class="nome">Ana, Mãe de Paula</p>
             <p>
