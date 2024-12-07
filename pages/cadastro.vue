@@ -1,12 +1,12 @@
 <script setup>
 import HeroSection from '~/components/HeroSection.vue';
 import Testimonials from '~/components/Testimonials.vue';
-import Login from '~/components/Login.vue'; // Importando o componente Login
+import Cadastro from '~/components/Cadastro.vue'; // Importando o componente Login
 </script>
 
 <template>
   <div>    
-    <Login apiEndpoint="http://localhost:3000"/>    
+    <Cadastro apiEndpoint="http://localhost:3000"/>    
   </div>
 </template>
 

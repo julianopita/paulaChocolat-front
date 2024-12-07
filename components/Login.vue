@@ -83,6 +83,10 @@ const handleLogin = async () => {
         <div id="botões">
           <button id="btn-enviar" type="submit">Entrar</button>
           </div>
+           <!-- Link para a página de cadastro -->
+        <p id="link-cadastro">
+          Não possui uma conta? <NuxtLink to="/cadastro">Cadastre-se aqui</NuxtLink>.
+        </p>
       </form>
     </div>
   </main>

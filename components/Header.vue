@@ -42,9 +42,9 @@
 
 
 
-        <button class="mudar-tema" @click="mudarTema">
+       <!--  <button class="mudar-tema" @click="mudarTema">
           <span class="material-symbols-outlined">contrast</span>
-        </button>
+        </button> -->
       </ul>
       <div>
     

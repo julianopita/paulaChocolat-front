@@ -34,6 +34,41 @@ server.post('/usuarios/login', (req, res) => {
   }
 });
 
+// Endpoint customizado para cadastro
+server.post('/usuarios/cadastro', (req, res) => {
+  console.log('Dados recebidos no cadastro:', req.body); // Verifica o que está sendo enviado
+  const { primeiroNome, ultimoNome, email, senha, papel } = req.body;
+
+  // Validação básica
+  if (!primeiroNome || !ultimoNome|| !email || !senha) {
+    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+  }
+
+  // Verifica se o email já está registrado
+  const usuarios = router.db.get('usuarios').value();
+  const usuarioExistente = usuarios.find((u) => u.email === email);
+  console.log(usuarios);
+
+  if (usuarioExistente) {
+    return res.status(409).json({ error: 'Email já registrado' });
+  }
+
+  // Adiciona o novo usuário ao banco de dados
+  const novoUsuario = {
+    id: usuarios.length ? usuarios[usuarios.length - 1].id + 1 : 1, // Incrementa ID
+    primeiroNome,
+    ultimoNome,
+    email,
+    senha,    
+    papel: papel || 'Cliente', // Define papel padrão como "Cliente"
+  };
+  console.log(novoUsuario);
+
+  router.db.get('usuarios').push(novoUsuario).write();
+
+  res.status(201).json(novoUsuario);
+});
+
 server.use(middlewares);
 server.use(router);
 

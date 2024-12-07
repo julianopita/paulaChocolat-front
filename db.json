@@ -31,6 +31,22 @@
       "email": "gerente@example.com",
       "senha": "1234",
       "papel": "Gerente"
+    },
+    {
+      "id": 3,
+      "primeiroNome": "Juliano",
+      "ultimoNome": "Pita",
+      "email": "jpita@example.com",
+      "senha": "1234",
+      "papel": "Cliente"
+    },
+    {
+      "id": 4,
+      "primeiroNome": "Juliano",
+      "ultimoNome": "Pita",
+      "email": "jpita@hotmail.com",
+      "senha": "1234",
+      "papel": "Cliente"
     }
   ]
 }
