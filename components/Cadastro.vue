@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { setUser } from '../composables/useUser';
 
 const props = defineProps({
   apiEndpoint: {
@@ -15,9 +14,9 @@ const senha = ref('');
 const errorMessage = ref('');
 const router = useRouter();
 
-const handleLogin = async () => {
+const handleCadastro = async () => {
   try {
-    const response = await fetch(`${props.apiEndpoint}/usuarios/login`, {
+    const response = await fetch(`${props.apiEndpoint}/usuarios/cadastro`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,14 +38,15 @@ const handleLogin = async () => {
     }
 
     const usuario = usuarios; // Assumindo que o email seja único
-   /*  const papelApi = usuario.papel;  // Variável para armazenar o papel da resposta
-    const nomeApi = usuario.primeiroNome;  // Variável para armazenar o nome da resposta */
-
-    setUser(usuario.papel, usuario.primeiroNome);  // Atualiza o estado global
-
+    const papelApi = usuario.papel;  // Variável para armazenar o papel da resposta
+    const nomeApi = usuario.primeiroNome;  // Variável para armazenar o nome da resposta
     console.log(usuario);
-    console.log(usuario.papel);
-    console.log(usuario.primeiroNome);
+    console.log(papelApi);
+    console.log(nomeApi);
+    
+
+    sessionStorage.setItem('papel', papelApi);
+    sessionStorage.setItem('primeiroNome', nomeApi);
     console.log(sessionStorage); 
        
 
@@ -56,9 +56,9 @@ const handleLogin = async () => {
     console.log(nome); */
 
     // Redirecionar com base no papel
-    if (usuario.papel === 'Gerente') {
+    if (papelApi === 'Gerente') {
       router.push('/gerenciar');
-    } else if (usuario.papel === 'Cliente') {
+    } else if (papelApi === 'Cliente') {
       router.push('/meusOrcamentos');
     } else {
       throw new Error('Papel desconhecido. Entre em contato com o suporte.');
@@ -82,7 +82,7 @@ const handleLogin = async () => {
         <input v-model="senha" type="password" id="senha" required />
         <div id="botões">
           <button id="btn-enviar" type="submit">Entrar</button>
-          </div>
+        </div>
       </form>
     </div>
   </main>
