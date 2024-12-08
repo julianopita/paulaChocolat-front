@@ -104,11 +104,11 @@
         const id = this.$route.params.id;
   
         // Carregar os dados do pedido atual
-        const respostaPedido = await fetch(`${apiEndpoint}/orcamentos/pedidos/${id}`);
+        const respostaPedido = await fetch(`${apiEndpoint}/orcamento/pedido/${id}`);
         this.pedido = await respostaPedido.json();
   
         // Carregar as opções
-        const respostaOpcoes = await fetch(`${apiEndpoint}/orcamentos/items`);
+        const respostaOpcoes = await fetch(`${apiEndpoint}/orcamento/item`);
         const items = await respostaOpcoes.json();
         this.massas = items.filter((item) => item.tipo === 2); // Tipo 2 é Massa
         this.recheios = items.filter((item) => item.tipo === 3); // Tipo 3 é Recheio
@@ -122,7 +122,7 @@
         try {
           const id = this.$route.params.id;
   
-          const resposta = await fetch(`${apiEndpoint}/orcamentos/pedidos/${id}`, {
+          const resposta = await fetch(`${apiEndpoint}/orcamento/pedido/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

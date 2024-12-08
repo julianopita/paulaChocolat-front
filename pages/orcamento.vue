@@ -105,7 +105,7 @@
     methods: {
       async fetchOpcoes() {
         try {
-          const resposta = await fetch(`${apiEndpoint}/orcamentos/items`);
+          const resposta = await fetch(`${apiEndpoint}/orcamento/item`);
           const items = await resposta.json();
           console.log('Itens recuperados:', items);
   
@@ -119,7 +119,7 @@
       },
       async submitPedido() {
         try {
-          const resposta = await fetch(`${apiEndpoint}/orcamentos/pedidos`, {            
+          const resposta = await fetch(`${apiEndpoint}/orcamento/pedido`, {            
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

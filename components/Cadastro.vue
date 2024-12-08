@@ -20,7 +20,7 @@ const router = useRouter();
 
 const handleCadastro = async () => {
   try {
-    const response = await fetch(`${props.apiEndpoint}/usuarios/cadastro`, {
+    const response = await fetch(`${props.apiEndpoint}/usuarios/registro`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

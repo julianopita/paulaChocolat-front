@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "paulaChocolat-front",
+			"path": "../../paulaChocolat-front"
+		}
+	],
+	"settings": {
+		"nuxt.isNuxtApp": false
+	}
+}

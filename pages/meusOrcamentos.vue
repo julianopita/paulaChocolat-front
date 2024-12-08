@@ -44,7 +44,7 @@ export default {
   const email = sessionStorage.getItem('email');
   if (email) {
     try {
-      const resposta = await fetch(`${apiEndpoint}/orcamentos/pedidos?usuario=${email}`);
+      const resposta = await fetch(`${apiEndpoint}/orcamento/pedido?usuario=${email}`);
       if (resposta.ok) {
         const pedidos = await resposta.json();
 
@@ -73,7 +73,7 @@ export default {
 
     async fetchItens() {
   try {
-    const resposta = await fetch(`${apiEndpoint}/orcamentos/items`);
+    const resposta = await fetch(`${apiEndpoint}/orcamento/item`);
     if (resposta.ok) {
       this.itens = await resposta.json();
     } else {
@@ -99,7 +99,7 @@ export default {
     async deletarOrcamento(id) {
       if (confirm('Tem certeza que deseja excluir este orçamento?')) {
         try {
-          const resposta = await fetch(`${apiEndpoint}/orcamentos/pedidos/${id}`, {
+          const resposta = await fetch(`${apiEndpoint}/orcamento/pedido/${id}`, {
             method: 'DELETE',
           });
 
