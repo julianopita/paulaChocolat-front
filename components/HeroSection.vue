@@ -44,7 +44,7 @@
 
     <div id="banner">
       <img
-        src="/images/cake.png"
+        src="~/assets/images/cake.png"
         alt="Imagem com um bolo redondo sabor pistache e doces sofisticados ao redor."
       />
     </div>

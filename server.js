@@ -1,10 +1,20 @@
 import jsonServer from 'json-server';
-import express from 'express';
 import fileUpload from 'express-fileupload';
+import express from 'express';
+import path from 'path';
+
+const app = express();
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+// Configura a pasta assets/images como estática
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
 
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
+
+
 
 // Configuração para o upload de arquivos
 server.use(fileUpload());
@@ -16,6 +26,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+
 
 server.use(jsonServer.bodyParser);
 
@@ -75,17 +86,18 @@ server.post('/usuarios/cadastro', (req, res) => {
 });
 
 // Endpoint para upload de imagem
+
 server.post('/produtos/upload', (req, res) => {
   if (!req.files || !req.files.imagem) {
     return res.status(400).json({ error: 'Nenhum arquivo foi enviado' });
   }
 
   const imagem = req.files.imagem;
-  const uploadPath = `/images/${imagem.name}`;
+  const uploadPath = `assets/images/${imagem.name}`;
 
   imagem.mv(uploadPath, (err) => {
     if (err) return res.status(500).json({ error: 'Erro ao fazer upload da imagem' });
-    res.json({ path: `/images/${imagem.name}` });
+    res.json({ path: `assets/images/${imagem.name}` });
   });
 });
 

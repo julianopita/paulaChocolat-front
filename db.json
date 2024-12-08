@@ -5,7 +5,7 @@
       "titulo": "Kit de Chocolates",
       "descricao": "Uma seleção dos melhores chocolates belgas, ideal para presentear.",
       "preco": 230,
-      "imagem": "/images/chocolates.jpg"
+      "imagem": "/assets/images/chocolate.jpg"
     },
     {
       "titulo": "caixa de bombons",
@@ -22,11 +22,18 @@
       "id": 4
     },
     {
-      "titulo": "dsaaa",
-      "descricao": "dddd",
-      "preco": 123,
-      "imagem": "/images/PS2025_banner1-br.jpg",
+      "titulo": "fds",
+      "descricao": "ew",
+      "preco": 32,
+      "imagem": "/assets/images/IG_noticias.pptx.jpg",
       "id": 5
+    },
+    {
+      "titulo": "fd",
+      "descricao": "fsd",
+      "preco": 3,
+      "imagem": "/images/PS2025_Destaque_copia.jpg",
+      "id": 6
     }
   ],
   "usuarios": [
