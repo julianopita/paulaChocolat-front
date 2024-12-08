@@ -3,11 +3,11 @@ import fileUpload from 'express-fileupload';
 import express from 'express';
 import path from 'path';
 
-const app = express();
+/* const app = express();
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 // Configura a pasta assets/images como estática
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/assets', express.static(path.join(__dirname, 'assets'))); */
 
 
 const server = jsonServer.create();
@@ -15,9 +15,9 @@ const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
 
-
 // Configuração para o upload de arquivos
 server.use(fileUpload());
+server.use(express.static('public')); // Certifique-se de que a pasta `public` está exposta
 
 // Middleware para adicionar cabeçalhos de CORS
 server.use((req, res, next) => {
@@ -44,10 +44,95 @@ server.post('/usuarios/login', (req, res) => {
     res.json({
       papel: usuario.papel,
       primeiroNome: usuario.primeiroNome,
+      email: usuario.email,
     });
   } else {
     res.status(401).json({ error: 'Credenciais inválidas' });
   }
+});
+
+// Endpoint para listar pedidos por email
+server.get('/orcamentos/pedidos', (req, res) => {
+  const usuario = req.query.usuario; // Obtém o email do usuário a partir dos parâmetros da query
+  
+  if (usuario) {
+    // Aqui você faz a consulta no banco de dados para encontrar os pedidos do usuário
+    const pedidos = router.db.get('pedidos').filter({ usuario }).value();
+    res.json(pedidos); // Retorna os pedidos encontrados
+  } else {
+    res.status(400).json({ message: 'Usuário não especificado' });
+  }
+});
+
+// Endpoint customizado para atualizar um pedido
+server.put('/orcamentos/pedidos/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const pedidoExistente = router.db.get('pedidos').find({ id }).value();
+
+  if (pedidoExistente) {
+    // Atualiza os dados do pedido
+    const pedidoAtualizado = { ...pedidoExistente, ...req.body };
+    router.db.get('pedidos').find({ id }).assign(pedidoAtualizado).write();
+    res.status(200).json(pedidoAtualizado);
+  } else {
+    res.status(404).json({ message: 'Pedido não encontrado' });
+  }
+});
+
+
+
+
+// Endpoint para criar um novo pedido
+server.post('/orcamentos/pedidos', (req, res) => {
+  const { massa, recheio1, recheio2, cobertura, frase, data, usuario } = req.body;
+
+  // Valida os dados do pedido
+  if (!massa || !recheio1 || !recheio2 || !cobertura || !usuario) {
+    return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
+  }
+
+  // Recupera os pedidos existentes
+  const pedidos = router.db.get('pedidos').value();
+
+  // Cria um novo pedido
+  const novoPedido = {
+    id: pedidos.length ? pedidos[pedidos.length - 1].id + 1 : 1,
+    massa,
+    recheio1,
+    recheio2,
+    cobertura,
+    frase,
+    data,
+    usuario,
+  };
+
+  // Adiciona o novo pedido ao banco de dados
+  router.db.get('pedidos').push(novoPedido).write();
+
+  // Retorna o pedido criado como resposta
+  res.status(201).json(novoPedido);
+});
+
+// Endpoint customizado para deletar um pedido
+server.delete('/orcamentos/pedidos/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10); // Obtém o ID do pedido a ser deletado
+  const pedido = router.db.get('pedidos').find({ id }).value();
+
+  if (pedido) {
+    // Remove o pedido do banco de dados
+    router.db.get('pedidos').remove({ id }).write();
+    res.status(200).json({ message: 'Pedido deletado com sucesso' });
+  } else {
+    res.status(404).json({ message: 'Pedido não encontrado' });
+  }
+});
+
+
+// Endpoint customizado para items
+server.get('/orcamentos/items', (req, res) => {
+  // Acessa a lista de itens diretamente do banco de dados
+  const items = router.db.get('items').value();
+  res.json(items); // Retorna os itens como resposta
 });
 
 // Endpoint customizado para cadastro
@@ -93,11 +178,11 @@ server.post('/produtos/upload', (req, res) => {
   }
 
   const imagem = req.files.imagem;
-  const uploadPath = `assets/images/${imagem.name}`;
+  const uploadPath = `public/static/${imagem.name}`;
 
   imagem.mv(uploadPath, (err) => {
     if (err) return res.status(500).json({ error: 'Erro ao fazer upload da imagem' });
-    res.json({ path: `assets/images/${imagem.name}` });
+    res.json({ path: `/static/${imagem.name}` });
   });
 });
 

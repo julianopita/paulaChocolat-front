@@ -3,7 +3,7 @@
     <!-- Wave Image -->
     <img
       id="waveind"
-      src="/images/wave.svg"
+      src="~/assets/images/wave.svg"
       alt="Wave de tom amarelo que faz o footer"
     />
 

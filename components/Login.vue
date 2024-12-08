@@ -42,11 +42,12 @@ const handleLogin = async () => {
    /*  const papelApi = usuario.papel;  // Variável para armazenar o papel da resposta
     const nomeApi = usuario.primeiroNome;  // Variável para armazenar o nome da resposta */
 
-    setUser(usuario.papel, usuario.primeiroNome);  // Atualiza o estado global
+    setUser(usuario.papel, usuario.primeiroNome, usuario.email);  // Atualiza o estado global
 
     console.log(usuario);
     console.log(usuario.papel);
     console.log(usuario.primeiroNome);
+    console.log(usuario.email);
     console.log(sessionStorage); 
        
 

@@ -15,24 +15,17 @@
       "id": 3
     },
     {
-      "titulo": "Batatas",
-      "descricao": "Batatas",
-      "preco": 30,
-      "imagem": "",
-      "id": 4
-    },
-    {
       "titulo": "fds",
       "descricao": "ew",
       "preco": 32,
-      "imagem": "/assets/images/IG_noticias.pptx.jpg",
+      "imagem": "static/IG_noticias.pptx.jpg",
       "id": 5
     },
     {
-      "titulo": "fd",
-      "descricao": "fsd",
-      "preco": 3,
-      "imagem": "/images/PS2025_Destaque_copia.jpg",
+      "titulo": "sss",
+      "descricao": "aaa",
+      "preco": 32,
+      "imagem": "/static/JIF-SP2024_basquete.jpg",
       "id": 6
     }
   ],
@@ -68,6 +61,68 @@
       "email": "jpita@hotmail.com",
       "senha": "1234",
       "papel": "Cliente"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "tipo": 1,
+      "nome": "Chocolate",
+      "descricao": "Um classico feito com chocolate 70% cacau.",
+      "imagem": "/static/chocolate.jpg"
+    },
+    {
+      "id": 2,
+      "tipo": 2,
+      "nome": "Chocolate",
+      "descricao": "Um classico feito com chocolate 70% cacau.",
+      "imagem": "/static/chocolate.jpg"
+    },
+    {
+      "id": 3,
+      "tipo": 3,
+      "nome": "Chocolate",
+      "descricao": "Um classico feito com chocolate 70% cacau.",
+      "imagem": "/static/chocolate.jpg"
+    },
+    {
+      "id": 4,
+      "tipo": 1,
+      "nome": "Chocolate",
+      "descricao": "Um classico feito com chocolate 70% cacau.",
+      "imagem": "/static/chocolate.jpg"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": 2,
+      "massa": 2,
+      "recheio1": 3,
+      "recheio2": 3,
+      "cobertura": 4,
+      "frase": "2342",
+      "data": "08/12/2024",
+      "usuario": "usuario@example.com"
+    },
+    {
+      "id": 3,
+      "massa": 2,
+      "recheio1": 3,
+      "recheio2": 3,
+      "cobertura": 4,
+      "frase": "as",
+      "data": "08/12/2024",
+      "usuario": "usuario@example.com"
+    },
+    {
+      "id": 4,
+      "massa": 2,
+      "recheio1": 3,
+      "recheio2": 3,
+      "cobertura": 4,
+      "frase": "",
+      "data": "08/12/2024",
+      "usuario": "usuario@example.com"
     }
   ]
 }

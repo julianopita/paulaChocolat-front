@@ -62,6 +62,7 @@ const fazerUploadImagem = async () => {
 
   if (!response.ok) throw new Error('Erro ao fazer upload da imagem');
   const { path } = await response.json(); // O backend deve retornar o caminho da imagem salva
+  console.log(path);
   return path;
 };
 
