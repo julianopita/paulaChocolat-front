@@ -4,7 +4,7 @@ import Products from '~/components/Products.vue'; // Importação correta
 
 <template>
     Produtos dinâmicos
- <Products apiEndpoint="http://localhost:3000/produtos" />
+ <Products apiEndpoint="http://localhost:3000/produtos" :index="false"/>
 </template>
 
 <style src="../assets/css/style.css"></style>

@@ -52,6 +52,11 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  index: {
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 });
 
 const produtos = ref([]);
@@ -80,12 +85,24 @@ onMounted(fetchProdutos);
     <p v-if="loading">Carregando produtos...</p>
     <p v-if="error">{{ error }}</p>
     <div v-if="produtos.length > 0">
-      <div v-for="produto in produtos" :key="produto.id" class="dish">
-        <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" width="150px"/>
-        <h3 class="dish-title">{{ produto.titulo }}</h3>
-        <span class="dish-description">{{ produto.descricao }}</span>
-        <div class="dish-price">
-          <h4>R$ {{ produto.preco.toFixed(2).replace('.', ',') }}</h4>
+      <div v-if="props.index">
+        <div v-for="produto in produtos.slice(0, 3)" :key="produto.id" class="dish">
+          <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" width="150px"/>
+          <h3 class="dish-title">{{ produto.titulo }}</h3>
+          <span class="dish-description">{{ produto.descricao }}</span>
+          <div class="dish-price">
+            <h4>R$ {{ produto.preco.toFixed(2).replace('.', ',') }}</h4>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div v-for="produto in produtos" :key="produto.id" class="dish">
+          <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" width="150px"/>
+          <h3 class="dish-title">{{ produto.titulo }}</h3>
+          <span class="dish-description">{{ produto.descricao }}</span>
+          <div class="dish-price">
+            <h4>R$ {{ produto.preco.toFixed(2).replace('.', ',') }}</h4>
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import Products from '~/components/Products.vue'; // Importação correta
 <template>
   <div>
     <HeroSection />
-    <Products apiEndpoint="http://localhost:3000/produtos" />
+    <Products apiEndpoint="http://localhost:3000/produtos" :index="true" />
     <Testimonials />
   </div>
 </template>
