@@ -44,7 +44,7 @@ export default {
   const email = sessionStorage.getItem('email');
   if (email) {
     try {
-      const resposta = await fetch(`${apiEndpoint}/orcamento/pedido?usuario=${email}`);
+      const resposta = await fetch(`${apiEndpoint}/orcamento/pedido/${email}`);
       if (resposta.ok) {
         const pedidos = await resposta.json();
 
