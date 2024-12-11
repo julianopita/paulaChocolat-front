@@ -52,6 +52,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  imageEndpoint: {
+    type: String,
+    required: true,
+  },
   index: {
     type: Boolean,
     required: true,
@@ -87,7 +91,7 @@ onMounted(fetchProdutos);
     <div v-if="produtos.length > 0">
       <div v-if="props.index">
         <div v-for="produto in produtos.slice(0, 3)" :key="produto.id" class="dish">
-          <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" width="150px"/>
+          <img :src="`${props.imageEndpoint}/${produto.imagem}`" class="dish-image" :alt="produto.titulo" width="150px"/>
           <h3 class="dish-title">{{ produto.titulo }}</h3>
           <span class="dish-description">{{ produto.descricao }}</span>
           <div class="dish-price">
@@ -97,7 +101,7 @@ onMounted(fetchProdutos);
       </div>
       <div v-else>
         <div v-for="produto in produtos" :key="produto.id" class="dish">
-          <img :src="produto.imagem" class="dish-image" :alt="produto.titulo" width="150px"/>
+          <img :src="`${props.imageEndpoint}/${produto.imagem}`" class="dish-image" :alt="produto.titulo" width="150px"/>
           <h3 class="dish-title">{{ produto.titulo }}</h3>
           <span class="dish-description">{{ produto.descricao }}</span>
           <div class="dish-price">

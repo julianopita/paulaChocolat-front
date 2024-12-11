@@ -5,6 +5,7 @@ const produtos = ref([]);
 const produtoEdicao = ref(null); // Produto sendo editado ou criado
 const criandoNovoProduto = ref(false); // Flag para indicar se estamos criando um novo produto
 const apiEndpoint = 'http://localhost:3000/produtos';
+const imageEndpoint = 'http://localhost:3000/static';
 const mensagemErro = ref('');
 const mensagemSucesso = ref('');
 const imagemArquivo = ref(null); // Armazena o arquivo de imagem para upload
@@ -23,9 +24,9 @@ const carregarProdutos = async () => {
 // Criar novo produto
 const criarProduto = async () => {
   try {
-    let imagemPath = '';
+    let nomeImagem = '';
     if (imagemArquivo.value) {
-      imagemPath = await fazerUploadImagem();
+      nomeImagem = await fazerUploadImagem();
     }
 
     const response = await fetch(apiEndpoint, {
@@ -35,7 +36,7 @@ const criarProduto = async () => {
       },
       body: JSON.stringify({
         ...produtoEdicao.value,
-        imagem: imagemPath,
+        imagem: nomeImagem,
       }),
     });
 
@@ -61,9 +62,8 @@ const fazerUploadImagem = async () => {
   });
 
   if (!response.ok) throw new Error('Erro ao fazer upload da imagem');
-  const { path } = await response.json(); // O backend deve retornar o caminho da imagem salva
-  console.log(path);
-  return path;
+  const { nomeImagem } = await response.json(); // O backend deve retornar o nome da imagem salva
+  return nomeImagem;
 };
 
 // Deletar um produto
@@ -158,7 +158,7 @@ onMounted(carregarProdutos);
             <h3>{{ produto.titulo }}</h3>
             <p>{{ produto.descricao }}</p>
             <p>Preço: R$ {{ produto.preco.toFixed(2) }}</p>
-            <img :src="produto.imagem" alt="Imagem do produto" width="100" />
+            <img :src="`${imageEndpoint}/${produto.imagem}`" alt="Imagem do produto" width="100" />
             <button @click="deletarProduto(produto.id)">Excluir</button>
             <button @click="abrirFormularioEdicao(produto)">Editar</button>
           </div>
