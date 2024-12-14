@@ -177,7 +177,7 @@ onMounted(carregarProdutos);
     <!-- Formulário de edição ou criação -->
     <section class="section-gerenciar-form" v-if="produtoEdicao">
       <h2>{{ criandoNovoProduto ? 'Criar Produto' : 'Editar Produto' }}</h2>
-      <form class="form-criar-produto" @submit.prevent="criandoNovoProduto ? criarProduto() : atualizarProduto()">
+      <form class="form-submit" @submit.prevent="criandoNovoProduto ? criarProduto() : atualizarProduto()">
         <label for="titulo">Título</label>
         <input v-model="produtoEdicao.titulo" type="text" id="titulo" required />
 
