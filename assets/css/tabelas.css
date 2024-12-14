@@ -1,0 +1,43 @@
+.titulo {
+    color: #e79b43;
+    margin: 20px 0;
+}
+
+/* Container da tabela */
+.tabela-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* Tabela */
+.tabela {
+    width: 80%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Cabeçalho */
+.tabela thead th {
+    background-color: #f8d77f;
+    color: #5c3d03;
+    padding: 12px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+
+/* Dados */
+.tabela tbody td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* Linhas alternadas */
+.tabela tbody tr:nth-child(odd) {
+    background-color: #fffbf3;
+}
