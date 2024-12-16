@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({ 
+export default defineNuxtConfig({  
    app: {
     head: {
       link: [
@@ -11,8 +11,10 @@ export default defineNuxtConfig({
       script: [
         { src: '/javascript/script.js', defer: true }       
       ],
+    
     },
-  },  
+  },
+    
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: true }
+  devtools: { enabled: true }   
 })

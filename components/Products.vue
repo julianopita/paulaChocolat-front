@@ -114,8 +114,8 @@ onMounted(fetchProdutos);
   </div>
 </template>
 
-<!-- <style src="../assets/css/style.css"></style> -->
-<style src="../assets/css/produtos_componente.css"></style>
+<style src="../assets/css/style.css"></style>
+<!--<style src="../assets/css/produtos_componente.css"></style>-->
 
 <!-- <style scoped>
 

@@ -15,10 +15,7 @@
         </li>
         <li class="nav_item" :class="{ active: currentRoute === '/sobrenos' }">
           <NuxtLink to="/sobrenos" class="nav-link">Sobre nós</NuxtLink>
-        </li>
-        <li class="nav_item" :class="{ active: currentRoute === '/orcamento' }">
-          <NuxtLink to="/orcamento" class="nav-link">Orçamentos</NuxtLink>
-        </li>
+        </li>        
         <li class="nav_item">
   <!-- Condicional para exibir Login ou Sair -->
   <NuxtLink v-if="!user.papel" to="/login" class="nav-link">Login</NuxtLink>
@@ -33,9 +30,12 @@
     </div>
     <div v-if="user.papel === 'Cliente'">
       <!-- Opções do Cliente -->
+      <li class="nav_item" :class="{ active: currentRoute === '/orcamento' }">
+          <NuxtLink to="/orcamento" class="nav-link">Novo Orçamento</NuxtLink>
+        </li>
       <li class="nav_item" :class="{ active: currentRoute === '/meusOrcamentos' }">
           <NuxtLink to="/meusOrcamentos" class="nav-link">Meus Orçamentos</NuxtLink>
-        </li>
+        </li>        
     </div>
     <li class="nav_link">Bem vindo, {{ user.nome }}</li>
     
