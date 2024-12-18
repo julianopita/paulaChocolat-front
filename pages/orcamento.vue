@@ -6,11 +6,13 @@
         <!-- Massa -->
         <h3 class="card-section-title">Massa</h3>
         <div class="opcao-cards">
-          <div v-for="item in massas" 
-            :key="item.id" 
-            class="opcao-card" 
-            :class="{'selecionado': pedido.massa === item.id}"
-            @click="pedido.massa = item.id">
+          <div
+            v-for="item in massas"
+            :key="item.id"
+            :class="{ 'selecionado': pedido.massa === item.id }"
+            class="opcao-card"
+            @click="pedido.massa = item.id"
+          >
             <img :src="`http://localhost:3000/static/opcoes_bolo/${item.imagem}`" alt="Imagem da massa" width="100px" />
             <p>{{ item.nome }}</p>
             <p>{{ item.descricao }}</p>

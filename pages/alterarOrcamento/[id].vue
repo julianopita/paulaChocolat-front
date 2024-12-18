@@ -4,70 +4,72 @@
   
       <form @submit.prevent="submitEdicao">
         <!-- Massa -->
-        <label for="massa">Massa:</label>
-        <div class="opcoes">
+        <h3 class="card-section-title" for="massa">Massa:</h3>
+        <div class="opcao-cards">
           <div
             v-for="item in massas"
             :key="item.id"
-            :class="{ selecionado: pedido.massa === item.id }"
-            class="card"
+            :class="{ 'selecionado': pedido.massa === item.id }"
+            class="opcao-card"
             @click="pedido.massa = item.id"
           >
-            <img :src="item.imagem" :alt="item.nome" />
+            <img :src="`http://localhost:3000/static/opcoes_bolo/${item.imagem}`" :alt="item.nome" />
             <h3>{{ item.nome }}</h3>
             <p>{{ item.descricao }}</p>
           </div>
         </div>
   
         <!-- Recheio 1 -->
-        <label for="recheio1">Recheio 1:</label>
-        <div class="opcoes">
+        <h3 class="card-section-title" for="recheio1">Recheio 1:</h3>
+        <div class="opcao-cards">
           <div
-            v-for="item in recheios"
+            v-for="item in recheios1"
             :key="item.id"
-            :class="{ selecionado: pedido.recheio1 === item.id }"
-            class="card"
+            :class="{ 'selecionado': pedido.recheio1 === item.id }"
+            class="opcao-card"
             @click="pedido.recheio1 = item.id"
           >
-            <img :src="item.imagem" :alt="item.nome" />
+            <img :src="`http://localhost:3000/static/opcoes_bolo/${item.imagem}`" :alt="item.nome" />
             <h3>{{ item.nome }}</h3>
             <p>{{ item.descricao }}</p>
           </div>
         </div>
   
         <!-- Recheio 2 -->
-        <label for="recheio2">Recheio 2:</label>
-        <div class="opcoes">
+        <h3 class="card-section-title" for="recheio2">Recheio 2:</h3>
+        <div class="opcao-cards">
           <div
-            v-for="item in recheios"
+            v-for="item in recheios2"
             :key="item.id"
-            :class="{ selecionado: pedido.recheio2 === item.id }"
-            class="card"
+            :class="{ 'selecionado': pedido.recheio2 === item.id }"
+            class="opcao-card"
             @click="pedido.recheio2 = item.id"
           >
-            <img :src="item.imagem" :alt="item.nome" />
+            <img :src="`http://localhost:3000/static/opcoes_bolo/${item.imagem}`" :alt="item.nome" />
             <h3>{{ item.nome }}</h3>
             <p>{{ item.descricao }}</p>
           </div>
         </div>
   
         <!-- Cobertura -->
-        <label for="cobertura">Cobertura:</label>
-        <div class="opcoes">
+        <h3 class="card-section-title" for="cobertura">Cobertura:</h3>
+        <div class="opcao-cards">
           <div
             v-for="item in coberturas"
             :key="item.id"
-            :class="{ selecionado: pedido.cobertura === item.id }"
-            class="card"
+            :class="{ 'selecionado': pedido.cobertura === item.id }"
+            class="opcao-card"
             @click="pedido.cobertura = item.id"
           >
-            <img :src="item.imagem" :alt="item.nome" />
+            <img :src="`http://localhost:3000/static/opcoes_bolo/${item.imagem}`" :alt="item.nome" />
             <h3>{{ item.nome }}</h3>
             <p>{{ item.descricao }}</p>
           </div>
         </div>
   
         <!-- Frase -->
+        <section class="section-gerenciar-form" style="margin-top: 20px;">
+          <div class="form-submit">
         <label for="frase">Frase (Máximo 30 caracteres):</label>
         <input
           v-model="pedido.frase"
@@ -75,8 +77,10 @@
           maxlength="30"
           placeholder="Escreva uma frase"
         />
+      </div>   
   
-        <button type="submit">Salvar Alterações</button>
+        <button class="form-button" type="submit">Salvar Alterações</button>
+      </section>
       </form>
     </div>
   </template>
@@ -104,15 +108,17 @@
         const id = this.$route.params.id;
   
         // Carregar os dados do pedido atual
-        const respostaPedido = await fetch(`${apiEndpoint}/orcamento/pedido/${id}`);
+        const respostaPedido = await fetch(`${apiEndpoint}/orcamento/pedido/id/${id}`);
         this.pedido = await respostaPedido.json();
+        console.log("===========", this.pedido);
   
         // Carregar as opções
         const respostaOpcoes = await fetch(`${apiEndpoint}/orcamento/item`);
         const items = await respostaOpcoes.json();
-        this.massas = items.filter((item) => item.tipo === 2); // Tipo 2 é Massa
-        this.recheios = items.filter((item) => item.tipo === 3); // Tipo 3 é Recheio
-        this.coberturas = items.filter((item) => item.tipo === 1); // Tipo 1 é Cobertura
+        this.coberturas = items.filter(item => item.tipo === 0); // Tipo 0 é Cobertura
+        this.recheios1 = items.filter(item => item.tipo === 1); // Tipo 1 é Recheio1
+        this.recheios2 = items.filter(item => item.tipo === 2); // Tipo 2 é Recheio2
+        this.massas = items.filter(item => item.tipo === 3); // Tipo 3 é Massa
       } catch (erro) {
         console.error('Erro ao carregar os dados:', erro);
       }
@@ -143,8 +149,11 @@
     },
   };
   </script>
+
+  <style src="../../assets/css/orcamentos_componente.css"></style>
+  <style src="../../assets/css/formularios.css"></style>
   
-  <style>
+  <!-- <style>
   /* Estilos para os cards */
   .opcoes {
     display: flex;
@@ -174,5 +183,5 @@
     border-color: #007bff;
     background-color: #e6f7ff;
   }
-  </style>
+  </style> -->
   
